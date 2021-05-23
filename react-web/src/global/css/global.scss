@@ -6,3 +6,41 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .main{
+    flex:1;
+  }
+
+  .padding-10-15px{
+    padding: 10px 15px;
+  }
+
+  .w-24{
+    width: 24px;
+  }
+
+  .h-24{
+    height: 24px;
+  }
+
+  .cursor-pointer{
+    cursor: pointer;
+  }
+
+  .display-flex{
+    display: flex;
+  }
+
+  .align-center{
+    align-items: center;
+  }
+
+  .justify-space-between{
+    justify-content: space-between;
+  }
+}

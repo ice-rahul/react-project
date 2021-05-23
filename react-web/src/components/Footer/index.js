@@ -1,10 +1,10 @@
 import React from 'react'
 import './Footer.scss'
 
-const Footer = () => {
+const Footer = (props) => {
 
   return (
-    <section className="Footer">
+    <section className={`Footer ${props.className ? props.className : ''}`}>
       Footer
     </section>
   )
