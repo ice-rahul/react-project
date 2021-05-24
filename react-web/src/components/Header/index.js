@@ -1,7 +1,9 @@
 import React from 'react'
 import { ReactComponent as MenuIcon } from '../../global/assets/icons/menu.svg'
-import {ReactComponent as LoginIcon} from "../../global/assets/icons/enter.svg";
+import {ReactComponent as StudentIcon} from "../../global/assets/icons/student.svg";
+import {ReactComponent as TeacherIcon} from "../../global/assets/icons/teacher.svg";
 import * as STYLE from '../../constants/style'
+import * as CONFIG from '../../constants/config'
 import './Header.scss'
 
 const Header = (props) => {
@@ -12,22 +14,26 @@ const Header = (props) => {
         props.className ? props.className : ""
       }`}
     >
-      <div className="display-flex align-center flex-1-1">
-        <MenuIcon
-          width={STYLE.ICON_WIDTH}
-          height={STYLE.ICON_HEIGHT}
-          className="cursor-pointer"
-        />
-        Header
-      </div>
-      <div className="display-flex align-center">
-        <LoginIcon className="cursor-pointer Loginicon" />
-        Student
+      <div className="display-flex align-center cursor-pointer gap-10px">
+        <MenuIcon width={STYLE.ICON_WIDTH} height={STYLE.ICON_HEIGHT} />
+        <span className="font-bold font-1-25em">{CONFIG.WEBSITE_NAME}</span>
       </div>
 
-      <div className="display-flex align-center">
-        <LoginIcon className="cursor-pointer Loginicon" />
-        Teacher
+      <div className="display-flex align-center gap-10px">
+        <div
+          className="display-flex align-center cursor-pointer"
+          title="Student Login"
+        >
+          <StudentIcon width={STYLE.ICON_WIDTH} height={STYLE.ICON_HEIGHT} />
+          Student
+        </div>
+        <div
+          className="display-flex align-center cursor-pointer"
+          title="Teacher Login"
+        >
+          <TeacherIcon width={STYLE.ICON_WIDTH} height={STYLE.ICON_HEIGHT} />
+          Teacher
+        </div>
       </div>
     </section>
   );
