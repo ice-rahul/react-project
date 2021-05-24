@@ -3,6 +3,7 @@ import Home from './Home'
 import About from './About'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import withAuthentication from '../components/Session/withAuthentication'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import * as ROUTE from '../constants/route'
 
@@ -27,4 +28,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default withAuthentication(App);
