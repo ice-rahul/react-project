@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {AuthContext} from '../../context/context';
+import {AuthContext} from '_context';
 import {SafeAreaView, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 

@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {AuthContext} from '../context/context';
+import {AuthContext} from '_context';
 import {Text} from 'react-native';
 
 import AuthNavigator from './auth-navigator';

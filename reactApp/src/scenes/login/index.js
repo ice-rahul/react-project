@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {SafeAreaView, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {AuthContext} from '../../context/context';
+import {AuthContext} from '_context';
 
 const LoginScreen = ({navigation}) => {
   const {signIn} = useContext(AuthContext);
