@@ -1,20 +1,22 @@
-import React from 'react';
-import {SafeAreaView, Text, TouchableHighlight} from 'react-native';
-import {HelloWorld} from '_atoms';
+import React, {useContext} from 'react';
+import {AuthContext} from '../../context/context';
+import {SafeAreaView, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const Root = createStackNavigator();
 
-const HomeScreen = () => (
-  <SafeAreaView>
-    <Text>Screen: Home</Text>
+const HomeScreen = () => {
+  const {signOut} = useContext(AuthContext);
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Screen: Home</Text>
 
-    <TouchableHighlight>
-      <Text>Go to About</Text>
-    </TouchableHighlight>
-    <HelloWorld name="Rahul Agrawal" />
-  </SafeAreaView>
-);
+      <TouchableOpacity onPress={() => signOut()}>
+        <Text style={styles.navigation}>SignOut</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+};
 
 const HomeNavigation = () => {
   return (
@@ -23,5 +25,19 @@ const HomeNavigation = () => {
     </Root.Navigator>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+  },
+  navigation: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+});
 
 export default HomeNavigation;

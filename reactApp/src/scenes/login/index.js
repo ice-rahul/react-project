@@ -1,19 +1,33 @@
-import React from 'react';
-import {SafeAreaView, Text, TouchableHighlight} from 'react-native';
+import React, {useContext} from 'react';
+import {SafeAreaView, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {AuthContext} from '../../context/context';
 
-const LoginScreen = ({navigation}) => (
-  <SafeAreaView>
-    <Text>Screen: Login</Text>
+const LoginScreen = ({navigation}) => {
+  const {signIn} = useContext(AuthContext);
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Screen: Login</Text>
 
-    <TouchableHighlight
-      onPress={() => {
-        navigation.navigate('app', {
-          screen: 'Home',
-        });
-      }}>
-      <Text>Go to home</Text>
-    </TouchableHighlight>
-  </SafeAreaView>
-);
+      <TouchableOpacity onPress={() => signIn()}>
+        <Text style={styles.navigation}>{'Go to Home >> '}</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+  },
+  navigation: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+});
 
 export default LoginScreen;

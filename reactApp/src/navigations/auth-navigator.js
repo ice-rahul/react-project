@@ -8,7 +8,8 @@ function AuthNavigator({navigation}) {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{gestureEnabled: false}}>
+      screenOptions={{gestureEnabled: false}}
+      headerMode="none">
       <Stack.Screen
         name="Login"
         component={LoginScreen}
