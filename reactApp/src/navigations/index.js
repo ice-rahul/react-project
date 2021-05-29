@@ -2,7 +2,7 @@ import React, {useState, useEffect, useMemo} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthContext} from '_context';
-import {Text} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 import AuthNavigator from './auth-navigator';
 import AppNavigator from './app-navigator';
@@ -33,11 +33,16 @@ const Navigator = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 3000);
   }, []);
 
   if (isLoading) {
-    return <Text>Hello</Text>;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Fitness Club</Text>
+        <Text style={styles.trainer}>By: Mr. Trainer</Text>
+      </View>
+    );
   }
 
   return (
@@ -66,5 +71,21 @@ const Navigator = () => {
     </AuthContext.Provider>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f9ca47',
+  },
+  title: {
+    fontSize: 32,
+  },
+  trainer: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 
 export default Navigator;
