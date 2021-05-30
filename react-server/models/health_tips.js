@@ -1,39 +1,28 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('lesson', {
-    lesson_id: {
+  return sequelize.define('health_tips', {
+    tip_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    lesson_title: {
+    tip_title: {
       type: DataTypes.STRING(1024),
       allowNull: false
     },
-    lesson_image_url: {
+    tip_image_url: {
       type: DataTypes.STRING(1024),
       allowNull: false
     },
-    lesson_video_url: {
-      type: DataTypes.STRING(1024),
-      allowNull: false
-    },
-    lesson_detail: {
+    tip_detail: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    lesson_pdf: {
-      type: DataTypes.STRING(1024),
-      allowNull: false
-    },
-    course_id: {
+    status: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'course',
-        key: 'course_id'
-      }
+      defaultValue: 1
     },
     created_at: {
       type: DataTypes.DATE,
@@ -47,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'lesson',
+    tableName: 'health_tips',
     timestamps: false,
     indexes: [
       {
@@ -55,14 +44,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "lesson_id" },
-        ]
-      },
-      {
-        name: "FK_LESSON_COURSE",
-        using: "BTREE",
-        fields: [
-          { name: "course_id" },
+          { name: "tip_id" },
         ]
       },
     ]

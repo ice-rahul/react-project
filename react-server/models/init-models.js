@@ -1,5 +1,7 @@
 var DataTypes = require("sequelize").DataTypes;
+var _banner = require("./banner");
 var _course = require("./course");
+var _health_tips = require("./health_tips");
 var _lesson = require("./lesson");
 var _my_order = require("./my_order");
 var _subscription = require("./subscription");
@@ -7,7 +9,9 @@ var _trainers = require("./trainers");
 var _users = require("./users");
 
 function initModels(sequelize) {
+  var banner = _banner(sequelize, DataTypes);
   var course = _course(sequelize, DataTypes);
+  var health_tips = _health_tips(sequelize, DataTypes);
   var lesson = _lesson(sequelize, DataTypes);
   var my_order = _my_order(sequelize, DataTypes);
   var subscription = _subscription(sequelize, DataTypes);
@@ -30,7 +34,9 @@ function initModels(sequelize) {
   users.hasMany(subscription, { as: "subscriptions", foreignKey: "user_id"});
 
   return {
+    banner,
     course,
+    health_tips,
     lesson,
     my_order,
     subscription,
