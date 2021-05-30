@@ -7,21 +7,22 @@ const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLID } = graphQl
 const CourseType = new GraphQLObjectType({
   name: 'Course',
   fields: () => ({
-    course_id: {type: GraphQLString},
-    course_name: {type: GraphQLString},
-    course_detail: {type: GraphQLString},
-    course_image: {type: GraphQLString},
-    course_mrp: {type: GraphQLString},
-    course_price: {type: GraphQLString},
-    course_duration: {type: GraphQLString},
-    course_level: {type: GraphQLString},
+    courseId: {type: GraphQLString},
+    courseName: {type: GraphQLString},
+    courseDetail: {type: GraphQLString},
+    courseImage: {type: GraphQLString},
+    courseMrp: {type: GraphQLString},
+    coursePrice: {type: GraphQLString},
+    courseDuration: {type: GraphQLString},
+    courseLevel: {type: GraphQLString},
+    courseStatus: {type: GraphQLString},
     expiry: {type: GraphQLString},
     trainer: {
       type: TrainerType,
       resolve(parent, args) {
         return (models.trainers.findOne({
           where: {
-            trainer_id: parent.trainer_id
+            trainerId: parent.trainerId
           }
         }))
       }
@@ -31,7 +32,7 @@ const CourseType = new GraphQLObjectType({
       resolve(parent, args) {
         return (models.lesson.findAll({
           where: {
-            course_id: parent.course_id
+            courseId: parent.courseId
           }
         }))
       }
@@ -42,32 +43,32 @@ const CourseType = new GraphQLObjectType({
 const TrainerType = new GraphQLObjectType({
   name: 'Trainer',
   fields: () => ({
-    trainer_id: {type: GraphQLString},
-    trainer_name: {type: GraphQLString},
-    trainer_degree: {type: GraphQLString},
-    trainer_bio: {type: GraphQLString},
-    trainer_status: {type: GraphQLString},
+    trainerId: {type: GraphQLString},
+    trainerName: {type: GraphQLString},
+    trainerDegree: {type: GraphQLString},
+    trainerBio: {type: GraphQLString},
+    trainerStatus: {type: GraphQLString},
   })
 })
 
 const LessonType = new GraphQLObjectType({
   name: 'Lesson',
   fields: () => ({
-    lesson_id: {type: GraphQLString},
-    lesson_title: {type: GraphQLString},
-    lesson_image_url: {type: GraphQLString},
-    lesson_video_url: {type: GraphQLString},
-    lesson_detail: {type: GraphQLString},
-    lesson_pdf: {type: GraphQLString},
+    lessonId: {type: GraphQLString},
+    lessonTitle: {type: GraphQLString},
+    lessonImageUrl: {type: GraphQLString},
+    lessonVideoUrl: {type: GraphQLString},
+    lessonDetail: {type: GraphQLString},
+    lessonPdf: {type: GraphQLString},
   })
 })
 
 const BannerType = new GraphQLObjectType({
   name: 'Banner',
   fields: () => ({
-    banner_id: {type: GraphQLString},
-    banner_title: {type: GraphQLString},
-    banner_url: {type: GraphQLString},
+    bannerId: {type: GraphQLString},
+    bannerTitle: {type: GraphQLString},
+    bannerUrl: {type: GraphQLString},
     status: {type: GraphQLString},
   })
 })
@@ -75,10 +76,10 @@ const BannerType = new GraphQLObjectType({
 const HealthTipType = new GraphQLObjectType({
   name: 'HealthTip',
   fields: () => ({
-    tip_id: {type: GraphQLString},
-    tip_title: {type: GraphQLString},
-    tip_image_url: {type: GraphQLString},
-    tip_detail: {type: GraphQLString},
+    tipId: {type: GraphQLString},
+    tipTitle: {type: GraphQLString},
+    tipImageUrl: {type: GraphQLString},
+    tipDetail: {type: GraphQLString},
     status: {type: GraphQLString},
   })
 })
@@ -96,16 +97,16 @@ const UserType = new GraphQLObjectType({
 const MyOrderType = new GraphQLObjectType({
   name: 'MyOrder',
   fields: () => ({
-    order_id: {type: GraphQLString},
-    payment_id: {type: GraphQLString},
-    order_amount: {type: GraphQLString},
+    orderId: {type: GraphQLString},
+    paymentId: {type: GraphQLString},
+    orderAmount: {type: GraphQLString},
     discount: {type: GraphQLString},
-    total_amount: {type: GraphQLString},
+    totalAmount: {type: GraphQLString},
     user: {
       type: UserType,
       resolve(parent, args){
         return (models.users.findOne({
-          user_id: parent.user_id
+          userId: parent.userId
         }))
       }
     },
@@ -114,7 +115,7 @@ const MyOrderType = new GraphQLObjectType({
       resolve(parent, args){
         return (models.course.findOne({
           where: {
-            course_id: parent.course_id
+            courseId: parent.courseId
           }
         }))
       }
@@ -137,7 +138,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args){
         return (models.course.findOne({
           where: {
-            course_id: args.id
+            courseId: args.id
           }
         }))
       }
@@ -151,16 +152,16 @@ const RootQuery = new GraphQLObjectType({
     healthTips: {
       type: new GraphQLList(HealthTipType),
       resolve(parent, args){
-        return (models.health_tips.findAll())
+        return (models.healthTips.findAll())
       }
     },
     myOrder: {
       type: new GraphQLList(MyOrderType),
-      args: {user_id: {type: GraphQLID}},
+      args: {userId: {type: GraphQLID}},
       resolve(parent, args){
-        return (models.my_order.findAll({
+        return (models.myOrder.findAll({
           where: {
-            user_id: args.user_id
+            userId: args.userId
           }
         }))
       }

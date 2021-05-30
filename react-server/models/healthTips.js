@@ -1,38 +1,44 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('health_tips', {
-    tip_id: {
+  return sequelize.define('healthTips', {
+    tipId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      field: 'tip_id'
     },
-    tip_title: {
+    tipTitle: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'tip_title'
     },
-    tip_image_url: {
+    tipImageUrl: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'tip_image_url'
     },
-    tip_detail: {
+    tipDetail: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      field: 'tip_detail'
     },
     status: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'updated_at'
     }
   }, {
     sequelize,

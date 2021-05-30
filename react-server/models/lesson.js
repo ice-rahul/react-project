@@ -1,49 +1,58 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('lesson', {
-    lesson_id: {
+    lessonId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      field: 'lesson_id'
     },
-    lesson_title: {
+    lessonTitle: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'lesson_title'
     },
-    lesson_image_url: {
+    lessonImageUrl: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'lesson_image_url'
     },
-    lesson_video_url: {
+    lessonVideoUrl: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'lesson_video_url'
     },
-    lesson_detail: {
+    lessonDetail: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      field: 'lesson_detail'
     },
-    lesson_pdf: {
+    lessonPdf: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'lesson_pdf'
     },
-    course_id: {
+    courseId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'course',
         key: 'course_id'
-      }
+      },
+      field: 'course_id'
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'updated_at'
     }
   }, {
     sequelize,

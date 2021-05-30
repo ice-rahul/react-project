@@ -1,53 +1,61 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('my_order', {
-    order_id: {
+  return sequelize.define('myOrder', {
+    orderId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      field: 'order_id'
     },
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'users',
         key: 'user_id'
-      }
+      },
+      field: 'user_id'
     },
-    course_id: {
+    courseId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'course',
         key: 'course_id'
-      }
+      },
+      field: 'course_id'
     },
-    payment_id: {
+    paymentId: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+      field: 'payment_id'
     },
-    order_amount: {
+    orderAmount: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'order_amount'
     },
     discount: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    total_amount: {
+    totalAmount: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'total_amount'
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'updated_at'
     }
   }, {
     sequelize,

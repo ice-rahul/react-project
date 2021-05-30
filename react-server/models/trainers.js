@@ -1,38 +1,45 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('trainers', {
-    trainer_id: {
+    trainerId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      field: 'trainer_id'
     },
-    trainer_name: {
+    trainerName: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+      field: 'trainer_name'
     },
-    trainer_degree: {
+    trainerDegree: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+      field: 'trainer_degree'
     },
-    trainer_bio: {
+    trainerBio: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      field: 'trainer_bio'
     },
-    trainer_status: {
+    trainerStatus: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 1
+      defaultValue: 1,
+      field: 'trainer_status'
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'updated_at'
     }
   }, {
     sequelize,

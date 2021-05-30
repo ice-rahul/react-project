@@ -1,67 +1,79 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('course', {
-    course_id: {
+    courseId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      field: 'course_id'
     },
-    course_name: {
+    courseName: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+      field: 'course_name'
     },
-    course_detail: {
+    courseDetail: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      field: 'course_detail'
     },
-    course_image: {
+    courseImage: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'course_image'
     },
-    course_mrp: {
+    courseMrp: {
       type: DataTypes.STRING(15),
-      allowNull: false
+      allowNull: false,
+      field: 'course_mrp'
     },
-    course_price: {
+    coursePrice: {
       type: DataTypes.STRING(15),
-      allowNull: false
+      allowNull: false,
+      field: 'course_price'
     },
-    course_duration: {
+    courseDuration: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+      field: 'course_duration'
     },
-    course_level: {
+    courseLevel: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: false,
+      field: 'course_level'
     },
-    trainer_id: {
+    trainerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'trainers',
         key: 'trainer_id'
-      }
+      },
+      field: 'trainer_id'
     },
-    course_status: {
+    courseStatus: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 1
+      defaultValue: 1,
+      field: 'course_status'
     },
     expiry: {
       type: DataTypes.INTEGER,
       allowNull: false,
       comment: "in days"
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'updated_at'
     }
   }, {
     sequelize,

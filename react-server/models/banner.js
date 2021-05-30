@@ -1,34 +1,39 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('banner', {
-    banner_id: {
+    bannerId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      field: 'banner_id'
     },
-    banner_title: {
+    bannerTitle: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'banner_title'
     },
-    banner_url: {
+    bannerUrl: {
       type: DataTypes.STRING(1024),
-      allowNull: false
+      allowNull: false,
+      field: 'banner_url'
     },
     status: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+      field: 'updated_at'
     }
   }, {
     sequelize,
