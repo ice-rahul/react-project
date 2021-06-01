@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "232144430047",
+    "firebase_url": "https://ecommerce-a31a9-default-rtdb.firebaseio.com",
+    "project_id": "ecommerce-a31a9",
+    "storage_bucket": "ecommerce-a31a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232144430047:android:697a3a4030ff2f17dbda6a",
+        "android_client_info": {
+          "package_name": "com.rahul.reactapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232144430047-4hj755c42fs9qdg1pueg9hh3bcjjfiqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJAspReYL8aaIEGr4s54FshHu9GwfLwtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232144430047-4hj755c42fs9qdg1pueg9hh3bcjjfiqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

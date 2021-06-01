@@ -1,3 +1,5 @@
-import React, {createContext} from 'react';
+import React from 'react';
 
-export const AuthContext = createContext();
+const FirebaseContext = React.createContext(null);
+
+export default FirebaseContext;

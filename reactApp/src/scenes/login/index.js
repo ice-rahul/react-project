@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -7,37 +7,83 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import {AuthContext} from '_context';
+import {FirebaseContext} from '_context';
 
-const LoginScreen = ({navigation}) => {
-  const {signIn} = useContext(AuthContext);
+import {connect} from 'react-redux';
+import {setAuthUser} from '_actions';
+
+const LoginScreen = props => {
+  const {doPhoneSignIn} = useContext(FirebaseContext);
+  const [login, setLogin] = useState(true);
+  const [mobile, setMobile] = useState('+91');
+  const [otp, setOtp] = useState('');
+  const [confirm, setConfirm] = useState(null);
+
+  const handleSignIn = async () => {
+    setLogin(false);
+    const confirmation = await doPhoneSignIn(mobile);
+    setConfirm(confirmation);
+  };
+
+  const handleOTP = async () => {
+    try {
+      await confirm.confirm(otp);
+    } catch (error) {
+      console.log('Invalid code.');
+    }
+  };
+
+  const Otp = () => (
+    <View style={styles.footer}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>OTP</Text>
+        <TextInput
+          style={styles.textInput}
+          value={otp}
+          onChangeText={setOtp}
+          placeholder="Enter OTP"
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleOTP}>
+          <Text style={styles.navigation}>{'Confirm OTP'}</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.footerTextBtn}>
+        <TouchableOpacity onPress={() => setLogin(true)}>
+          <Text style={styles.footerBtnText}>
+            {'<< Try Other Mobile Number'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
+  const Login = () => (
+    <View style={styles.footer}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Mobile</Text>
+        <TextInput
+          style={styles.textInput}
+          value={mobile}
+          onChangeText={setMobile}
+          placeholder="Enter Mobile Number"
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+          <Text style={styles.navigation}>{'Send OTP'}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>{login ? 'Login / Register' : 'OTP'}</Text>
       </View>
-      <View style={styles.footer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Mobile</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter Mobile Number"
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Password</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter Password"
-            secureTextEntry
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => signIn()}>
-            <Text style={styles.navigation}>{'Click Here to Login >>'}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      {login ? <Login /> : <Otp />}
     </SafeAreaView>
   );
 };
@@ -60,6 +106,15 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
   },
+  footerTextBtn: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerBtnText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
@@ -69,6 +124,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#ffffff',
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   textInput: {
     borderWidth: 1,
@@ -95,4 +152,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default connect(null, {setAuthUser})(LoginScreen);

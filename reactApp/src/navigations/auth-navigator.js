@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import LoginScreen from '_scenes/login';
+
 const Stack = createStackNavigator();
 
 function AuthNavigator({navigation}) {
@@ -13,7 +14,7 @@ function AuthNavigator({navigation}) {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{title: 'My React App'}}
+        options={{title: 'Login'}}
       />
     </Stack.Navigator>
   );

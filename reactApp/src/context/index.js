@@ -1,3 +1,4 @@
-import {AuthContext} from './context';
+import FirebaseContext from './context';
+import Firebase from './firebase';
 
-export {AuthContext};
+export {FirebaseContext, Firebase};

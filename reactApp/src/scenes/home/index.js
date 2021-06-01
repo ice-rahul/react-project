@@ -1,24 +1,26 @@
 import React, {useContext} from 'react';
-import {AuthContext} from '_context';
+import {FirebaseContext} from '_context';
 import {SafeAreaView, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {connect} from 'react-redux';
+import {setAuthUser} from '_actions';
 
 const Root = createStackNavigator();
 
-const HomeScreen = () => {
-  const {signOut} = useContext(AuthContext);
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Screen: Home</Text>
+const HomeNavigation = props => {
+  const HomeScreen = () => {
+    const {doSignOut} = useContext(FirebaseContext);
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Screen: Home</Text>
 
-      <TouchableOpacity onPress={() => signOut()}>
-        <Text style={styles.navigation}>SignOut</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
-  );
-};
+        <TouchableOpacity onPress={doSignOut}>
+          <Text style={styles.navigation}>SignOut</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    );
+  };
 
-const HomeNavigation = () => {
   return (
     <Root.Navigator>
       <Root.Screen name="Home" component={HomeScreen} />
@@ -40,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeNavigation;
+export default connect(null, {setAuthUser})(HomeNavigation);
