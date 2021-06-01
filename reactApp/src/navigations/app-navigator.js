@@ -14,6 +14,7 @@ import ChatSelectedIcon from '_assets/images/chat_selected.png';
 
 import HomeScreen from '_scenes/home';
 import AboutScreen from '_scenes/about';
+import ChatScreen from '_scenes/chat';
 
 const Tab = createBottomTabNavigator();
 // const Drawer = createDrawerNavigator();
@@ -115,7 +116,7 @@ const TabsNavigation = () => (
     />
     <Tab.Screen
       name="Contact"
-      component={AboutScreen}
+      component={ChatScreen}
       options={{
         tabBarIcon: ({focused}) => (
           <View style={styles.tabBarBtnAlignment}>
