@@ -87,6 +87,7 @@ const HealthTipType = new GraphQLObjectType({
 const UserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
+    authToken: {type: GraphQLString},
     name: {type: GraphQLString},
     email: {type: GraphQLString},
     mobile: {type: GraphQLString},
@@ -169,6 +170,81 @@ const RootQuery = new GraphQLObjectType({
   }
 })
 
+const RootMutation = new GraphQLObjectType({
+  name: 'RootMutation',
+  fields: {
+    user: {
+      type: UserType,
+      args: { 
+        authToken: {type: GraphQLID},
+        mobile: {type: GraphQLString},
+        name: {type: GraphQLString},
+        email: {type: GraphQLString}, 
+      },
+      async resolve(parent, args){
+        let user = await models.users.findOne({
+          where: {
+            authToken: args.authToken,
+          }
+        });
+        if(!user) {
+          user = await models.users.create({
+            authToken: args.authToken,
+            mobile: args.mobile
+          })
+        } else {
+          await models.users.update({
+            name: args.name ? args.name : user.name,
+            email: args.email ? args.email : user.email,
+            mobile: args.mobile ? args.mobile : user.mobile
+          }, {
+            where: {
+              authToken: args.authToken,
+            }
+          })
+          user = await models.users.findOne({
+            where: {
+              authToken: args.authToken,
+            }
+          });
+        }
+        return user;
+      }
+    },
+    banner: {
+      type: BannerType,
+      args: {
+        bannerTitle: {type: GraphQLString},
+        bannerUrl: {type: GraphQLString}
+      },
+      async resolve(parent, args){
+        await models.banner.create({
+          bannerTitle: args.bannerTitle,
+          bannerUrl: args.bannerUrl
+        })
+        return models.banner.findAll()
+      }
+    },
+    healthTip: {
+      type: HealthTipType,
+      args: {
+        tipTitle: {type: GraphQLString},
+        tipDetail: {type: GraphQLString},
+        tipImageUrl: {type: GraphQLString}
+      },
+      async resolve(parent, args){
+        await models.healthTips.create({
+          tipTitle: args.tipTitle,
+          tipDetail: args.tipDetail,
+          tipImageUrl: args.tipImageUrl
+        })
+        return models.healthTips.findAll()
+      }
+    }
+  }
+})
+
 module.exports = new graphQl.GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: RootMutation,
 })

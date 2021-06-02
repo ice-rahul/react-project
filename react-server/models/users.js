@@ -15,15 +15,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     email: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     mobile: {
       type: DataTypes.STRING(20),
-      allowNull: false
+      allowNull: true
     },
     status: {
       type: DataTypes.INTEGER,
