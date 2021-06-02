@@ -20,6 +20,7 @@
     "@react-navigation/stack": "^5.14.5",
     "react": "17.0.1",
     "react-native": "0.64.1",
+    "react-native-dotenv": "^2.5.5",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.1.0",
     "react-native-rename": "^2.8.1",
@@ -71,7 +72,15 @@
             "_store": "./src/redux/store"
           }
         }
-      ]
+      ],
+      ["module:react-native-dotenv", {
+        "moduleName": "@env",
+        "path": ".env",
+        "blacklist": null,
+        "whitelist": null,
+        "safe": false,
+        "allowUndefined": false
+      }]
     ]
   }
 }

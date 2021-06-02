@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useRef} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -15,20 +15,28 @@ import {setAuthUser} from '_actions';
 const LoginScreen = props => {
   const {doPhoneSignIn} = useContext(FirebaseContext);
   const [login, setLogin] = useState(true);
-  const [mobile, setMobile] = useState('+91');
-  const [otp, setOtp] = useState('');
+  const mobile = useRef(null);
+  const otp = useRef(null);
   const [confirm, setConfirm] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSignIn = async () => {
-    setLogin(false);
-    const confirmation = await doPhoneSignIn(mobile);
-    setConfirm(confirmation);
+    setError('Sending SMS Please Wait');
+    const mobileNumber = `+91${mobile.current.value}`;
+    try {
+      const confirmation = await doPhoneSignIn(mobileNumber);
+      setLogin(false);
+      setConfirm(confirmation);
+    } catch (err) {
+      console.log(err.message);
+      setError('Please verify the Mobile Number and Try Again');
+    }
   };
 
   const handleOTP = async () => {
     try {
-      await confirm.confirm(otp);
-    } catch (error) {
+      await confirm.confirm(otp.current.value);
+    } catch (err) {
       console.log('Invalid code.');
     }
   };
@@ -39,8 +47,10 @@ const LoginScreen = props => {
         <Text style={styles.label}>OTP</Text>
         <TextInput
           style={styles.textInput}
-          value={otp}
-          onChangeText={setOtp}
+          ref={otp}
+          onChangeText={val => {
+            otp.current.value = val;
+          }}
           placeholder="Enter OTP"
         />
       </View>
@@ -65,15 +75,20 @@ const LoginScreen = props => {
         <Text style={styles.label}>Mobile</Text>
         <TextInput
           style={styles.textInput}
-          value={mobile}
-          onChangeText={setMobile}
-          placeholder="Enter Mobile Number"
+          ref={mobile}
+          onChangeText={val => {
+            mobile.current.value = val;
+          }}
+          placeholder="Enter Mobile Number (Ex. 9691078419)"
         />
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleSignIn}>
           <Text style={styles.navigation}>{'Send OTP'}</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.footerTextBtn}>
+        <Text style={styles.footerBtnText}>{error}</Text>
       </View>
     </View>
   );
@@ -114,6 +129,7 @@ const styles = StyleSheet.create({
   footerBtnText: {
     fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   title: {
     fontSize: 28,
