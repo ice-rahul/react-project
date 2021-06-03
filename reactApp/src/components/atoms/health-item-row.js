@@ -1,6 +1,16 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 
+const HealthItemRow = ({item: {title, image_url, description}}) => (
+  <View style={styles.container}>
+    <Image source={{uri: image_url}} style={styles.photo} />
+    <View style={styles.container_text}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.description}>{description}</Text>
+    </View>
+  </View>
+);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -34,14 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomRow = ({title, description, image_url}) => (
-  <View style={styles.container}>
-    <Image source={{uri: image_url}} style={styles.photo} />
-    <View style={styles.container_text}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-    </View>
-  </View>
-);
-
-export default CustomRow;
+export default HealthItemRow;
