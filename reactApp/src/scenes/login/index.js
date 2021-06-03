@@ -52,6 +52,7 @@ const LoginScreen = props => {
             otp.current.value = val;
           }}
           placeholder="Enter OTP"
+          defaultValue={otp?.current?.value}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -80,6 +81,7 @@ const LoginScreen = props => {
             mobile.current.value = val;
           }}
           placeholder="Enter Mobile Number (Ex. 9691078419)"
+          defaultValue={mobile?.current?.value}
         />
       </View>
       <View style={styles.buttonContainer}>
