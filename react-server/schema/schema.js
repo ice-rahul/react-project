@@ -166,13 +166,7 @@ const RootQuery = new GraphQLObjectType({
           }
         }))
       }
-    }
-  }
-})
-
-const RootMutation = new GraphQLObjectType({
-  name: 'RootMutation',
-  fields: {
+    },
     user: {
       type: UserType,
       args: { 
@@ -211,6 +205,12 @@ const RootMutation = new GraphQLObjectType({
         return user;
       }
     },
+  }
+})
+
+const RootMutation = new GraphQLObjectType({
+  name: 'RootMutation',
+  fields: {
     banner: {
       type: BannerType,
       args: {
