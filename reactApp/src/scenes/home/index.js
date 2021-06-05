@@ -1,25 +1,14 @@
-import React, {useContext} from 'react';
-import {FirebaseContext} from '_context';
-import {
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import React from 'react';
+import {SafeAreaView, Text, StyleSheet, FlatList} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {connect} from 'react-redux';
-import {setAuthUser} from '_actions';
 import {SliderBox} from 'react-native-image-slider-box';
-import {HealthItemRow} from '_atoms';
+import {HealthItemRow, withAuthorization} from '_atoms';
 import {IMAGE_LIST, ROW_DATA} from '_constants/dummyData';
 
 const Root = createStackNavigator();
 
 const HomeNavigation = props => {
   const HomeScreen = () => {
-    const {doSignOut} = useContext(FirebaseContext);
-
     return (
       <SafeAreaView>
         <SliderBox
@@ -41,11 +30,6 @@ const HomeNavigation = props => {
           imageLoadingColor="#2196F3"
         />
         <Text style={styles.title}>Health Tips</Text>
-        {/*
-          <TouchableOpacity onPress={doSignOut}>
-            <Text style={styles.navigation}>SignOut</Text>
-          </TouchableOpacity>
-        */}
 
         <FlatList
           renderItem={HealthItemRow}
@@ -102,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, {setAuthUser})(HomeNavigation);
+export default withAuthorization(HomeNavigation);
