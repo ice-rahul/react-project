@@ -170,7 +170,7 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { 
-        authToken: {type: GraphQLID},
+        authToken: {type: GraphQLString},
         mobile: {type: GraphQLString},
         name: {type: GraphQLString},
         email: {type: GraphQLString}, 
