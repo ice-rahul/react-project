@@ -38,7 +38,6 @@ const withAuthentication = Component => {
     const syncUser = async () => {
       const authUser = await getFromLocalStorage('authUser');
       let user = null;
-      console.log(authUser, 'WithAuthentication');
       if (authUser !== null) {
         user = JSON.parse(authUser);
       }

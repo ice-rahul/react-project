@@ -15,8 +15,6 @@ const Navigator = props => {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
 
-  console.log(props.authUser);
-
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
