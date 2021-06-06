@@ -19,9 +19,12 @@ const USER_QUERY = gql`
 `;
 const withAuthorization = Component => {
   const NewComponent = props => {
-    console.log(props.authUser.uid);
+    console.log(props.authUser.uid, props.authUser.phoneNumber);
     const {data, loading, error} = useQuery(USER_QUERY, {
-      variables: {authToken: props.authUser.uid},
+      variables: {
+        authToken: props.authUser.uid,
+        mobile: props.authUser.phoneNumber,
+      },
     });
     console.log(data, error, loading);
     return <Component {...props} />;
