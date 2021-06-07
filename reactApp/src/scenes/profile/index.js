@@ -1,72 +1,119 @@
-import React from 'react';
-import {SafeAreaView, Text, StyleSheet, FlatList, Button} from 'react-native';
+import React, {Component} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {SliderBox} from 'react-native-image-slider-box';
-import {HealthItemRow, withAuthorization} from '_atoms';
-import {IMAGE_LIST, ROW_DATA} from '_constants/dummyData';
+import {withAuthorization} from '_atoms';
+import Avatar from '_assets/images/avatar.png';
+import bgpro from '_assets/images/bgpro.jpg';
 
 const Root = createStackNavigator();
 
 const ProfileNavigation = props => {
   const ProfileScreen = () => {
     return (
-      <SafeAreaView>
-        <FlatList
-          renderItem={HealthItemRow}
-          data={ROW_DATA}
-          keyExtractor={item => item.id}
-        />
-      </SafeAreaView>
+      <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <ImageBackground
+            source={bgpro}
+            style={styles.image}></ImageBackground>
+        </View>
+        <Image style={styles.avatar} source={Avatar} />
+        <View style={styles.body}>
+          <View style={styles.bodyContent}>
+            <Text style={styles.name}>Rajeshwar Kashyap</Text>
+            <Text style={styles.info}>Mobile Application developer</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
+              electram expetendis, omittam deseruisse consequuntur ius an,
+            </Text>
+
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Opcion 1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Opcion 2</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+      </ScrollView>
     );
   };
 
   return (
     <Root.Navigator>
-      <Root.Screen
-        name="Profile"
-        component={ProfileScreen}
-
-      />
+      <Root.Screen name="Profile" component={ProfileScreen} />
     </Root.Navigator>
   );
 };
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 16,
-    borderLeftWidth: 4,
-    borderLeftColor: '#4bbdef',
-    paddingLeft: 10,
+  header: {
+    backgroundColor: '#00BFFF',
+    height: 200,
   },
-  navigation: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  paginationBoxStyle: {
-    position: 'absolute',
-    bottom: 0,
-    padding: 0,
-    alignItems: 'center',
-    alignSelf: 'center',
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
     justifyContent: 'center',
-    paddingVertical: 10,
   },
-  dotStyle: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    marginHorizontal: 0,
-    padding: 0,
-    margin: 0,
-    backgroundColor: 'rgba(128, 128, 128, 0.92)',
+  avatar: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: 'white',
+    marginBottom: 10,
+    alignSelf: 'center',
+    position: 'absolute',
+    marginTop: 130,
   },
-  imageComponentStyle: {
-    borderRadius: 15,
-    width: '97%',
-    marginTop: 15,
+  name: {
+    fontSize: 22,
+    color: 'red',
+    fontWeight: '600',
+  },
+  body: {
+    marginTop: 40,
+  },
+  bodyContent: {
+    flex: 0,
+    alignItems: 'center',
+    padding: 30,
+  },
+  name: {
+    fontSize: 28,
+    color: '#696969',
+    fontWeight: '600',
+  },
+  info: {
+    fontSize: 16,
+    color: '#00BFFF',
+    marginTop: 10,
+  },
+  description: {
+    fontSize: 16,
+    color: '#696969',
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  buttonContainer: {
+    marginTop: 10,
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    width: 250,
+    borderRadius: 30,
+    backgroundColor: '#00BFFF',
   },
 });
 
