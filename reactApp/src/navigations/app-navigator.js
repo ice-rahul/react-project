@@ -15,6 +15,8 @@ import ChatSelectedIcon from '_assets/images/chat_selected.png';
 import HomeScreen from '_scenes/home';
 import AboutScreen from '_scenes/about';
 import ChatScreen from '_scenes/chat';
+import ClassesScreen from '_scenes/classes';
+import ProfileScreen from '_scenes/profile';
 
 const Tab = createBottomTabNavigator();
 // const Drawer = createDrawerNavigator();
@@ -63,8 +65,8 @@ const TabsNavigation = () => (
       }}
     />
     <Tab.Screen
-      name="About"
-      component={AboutScreen}
+      name="Classes"
+      component={ClassesScreen}
       options={{
         tabBarIcon: ({focused}) => (
           <View style={styles.tabBarBtnAlignment}>
@@ -97,7 +99,7 @@ const TabsNavigation = () => (
     />
     <Tab.Screen
       name="Profile"
-      component={AboutScreen}
+      component={ProfileScreen}
       options={{
         tabBarIcon: ({focused}) => (
           <View style={styles.tabBarBtnAlignment}>
